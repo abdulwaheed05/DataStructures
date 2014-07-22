@@ -88,8 +88,112 @@ namespace DataStructures.Tests
         [TestMethod]
         public void DeleteNodeWithLeftAndRightChild()
         {
+            int[] unsortedArray = { 3, 5, 4, 1, 2, 6 };
+            int[] sortedArray = { 1, 2, 3, 4, 6};
+
+            BST<int> bst = new BST<int>();
+
+            foreach (var item in unsortedArray)
+            {
+                bst.Insert(item);
+            }
+
+            Assert.IsTrue(bst.DeleteNode(5));
+            Assert.IsNull(bst.Search(5));
+
+            var inOrderTraversal = bst.Traverse(TreeTraversalType.InOrder).ToArray();
+
+            Assert.AreEqual(sortedArray.Length, inOrderTraversal.Length);
+
+            for (int i = 0; i < sortedArray.Length; i++)
+            {
+                Assert.AreEqual(sortedArray[i], inOrderTraversal[i]);
+            }
+        }
+
+        [TestMethod]
+        public void DeleteNodeWithLeftAndRightChildRightChildHasLeft()
+        {
+            int[] unsortedArray = { 3, 5, 4, 1, 2, 8, 7};
+            int[] sortedArray = { 1, 2, 3, 4, 7, 8 };
+
+            BST<int> bst = new BST<int>();
+
+            foreach (var item in unsortedArray)
+            {
+                bst.Insert(item);
+            }
+
+            Assert.IsTrue(bst.DeleteNode(5));
+            Assert.IsNull(bst.Search(5));
+
+            var inOrderTraversal = bst.Traverse(TreeTraversalType.InOrder).ToArray();
+
+            Assert.AreEqual(sortedArray.Length, inOrderTraversal.Length);
+
+            for (int i = 0; i < sortedArray.Length; i++)
+            {
+                Assert.AreEqual(sortedArray[i], inOrderTraversal[i]);
+            }
+        }
+
+        [TestMethod]
+        public void DeleteRootNodeWithLeftAndRightChild()
+        {
             int[] unsortedArray = { 3, 5, 4, 1, 2 };
             int[] sortedArray = { 1, 2, 4, 5 };
+
+            BST<int> bst = new BST<int>();
+
+            foreach (var item in unsortedArray)
+            {
+                bst.Insert(item);
+            }
+
+            Assert.IsTrue(bst.DeleteNode(3));
+            Assert.IsNull(bst.Search(3));
+
+            var inOrderTraversal = bst.Traverse(TreeTraversalType.InOrder).ToArray();
+
+            Assert.AreEqual(sortedArray.Length, inOrderTraversal.Length);
+
+            for (int i = 0; i < sortedArray.Length; i++)
+            {
+                Assert.AreEqual(sortedArray[i], inOrderTraversal[i]);
+            }
+        }
+
+        [TestMethod]
+        public void DeleteRootNodeWithLeftChildOnly()
+        {
+            int[] unsortedArray = { 3, 2 };
+            int[] sortedArray = { 2 };
+
+            BST<int> bst = new BST<int>();
+
+            foreach (var item in unsortedArray)
+            {
+                bst.Insert(item);
+            }
+
+            Assert.IsTrue(bst.DeleteNode(3));
+            Assert.IsNull(bst.Search(3));
+
+            var inOrderTraversal = bst.Traverse(TreeTraversalType.InOrder).ToArray();
+
+            Assert.AreEqual(sortedArray.Length, inOrderTraversal.Length);
+
+            for (int i = 0; i < sortedArray.Length; i++)
+            {
+                Assert.AreEqual(sortedArray[i], inOrderTraversal[i]);
+            }
+        }
+
+        [TestMethod]
+        public void DeleteRootNodeWithRightChildOnly()
+        {
+            int[] unsortedArray = { 3, 5 };
+            int[] sortedArray = { 5 };
 
             BST<int> bst = new BST<int>();
 

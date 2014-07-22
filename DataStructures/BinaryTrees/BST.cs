@@ -108,33 +108,33 @@ namespace DataStructures.BinaryTrees
                 }
                 else
                 {
-                    if (parent.Left == current)
-                    {
+                    result = parent.Data.CompareTo(current.Data);
+                    if (result > 0)
+                        // parent.Value > current.Value, so make current's left child a left child of parent
                         parent.Left = current.Left;
-                    }
-                    else
-                    {
+                    else if (result < 0)
+                        // parent.Value < current.Value, so make current's left child a right child of parent
                         parent.Right = current.Left;
-                    }
                 }
             }
 
             else if (current.Right.Left == null)
             {
+                current.Right.Left = current.Left;
+
                 if (parent == null)
                 {
                     this.rootNode = current.Right;
                 }
                 else
                 {
-                    if (parent.Left == current)
-                    {
+                    result = parent.Data.CompareTo(current.Data);
+                    if (result > 0)
+                        // parent.Value > current.Value, so make current's right child a left child of parent
                         parent.Left = current.Right;
-                    }
-                    else
-                    {
+                    else if (result < 0)
+                        // parent.Value < current.Value, so make current's right child a right child of parent
                         parent.Right = current.Right;
-                    }
                 }            
             }
             else
@@ -159,14 +159,13 @@ namespace DataStructures.BinaryTrees
                 }
                 else
                 {
-                    if (parent.Left == current)
-                    {
+                    result = parent.Data.CompareTo(current.Data);
+                    if (result > 0)
+                        // parent.Value > current.Value, so make leftmost a left child of parent
                         parent.Left = tempNode;
-                    }
-                    else
-                    {
+                    else if (result < 0)
+                        // parent.Value < current.Value, so make leftmost a right child of parent
                         parent.Right = tempNode;
-                    }
                 }
             }
 
