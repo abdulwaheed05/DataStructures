@@ -23,12 +23,15 @@ namespace DataStructures.Tests
 
             for (int i = 0; i < unsortedArray.Length; i++)
             {
-                Assert.IsTrue(bst.Search(unsortedArray[i]));
+                int insertedItem = unsortedArray[i];
+                Node<int> returnedNode = bst.Search(insertedItem);
+                Assert.IsNotNull(returnedNode);
+                Assert.AreEqual(insertedItem, returnedNode.Data);
             }
 
             foreach (var nonInsertedItem in nonInsertedItems)
             {
-                Assert.IsFalse(bst.Search(nonInsertedItem));
+                Assert.IsNull(bst.Search(nonInsertedItem));
             }
         }
     }

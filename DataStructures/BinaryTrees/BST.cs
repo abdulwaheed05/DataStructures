@@ -36,7 +36,7 @@ namespace DataStructures.BinaryTrees
             InsertRecursive(data, this.rootNode);
         }
 
-        public bool Search(T data)
+        public Node<T> Search(T data)
         {
             return SearchRecursive(data, this.rootNode);
         }
@@ -66,29 +66,107 @@ namespace DataStructures.BinaryTrees
             }
         }
 
-        public void DeleteNode(T data)
+        public bool DeleteNode(T data)
+        {
+            if (this.rootNode == null)
+                return false;
+
+
+            // Find the node to delete
+            Node<T> parent = null;
+            Node<T> current = this.rootNode;
+
+            int compareResult = current.Data.CompareTo(data);
+
+            while (compareResult != 0)
+            {
+                if (compareResult > 0)
+                {
+                    parent = current;
+                    current = current.Left;
+                }
+                else if (compareResult < 0)
+                {
+                    parent = current;
+                    current = current.Right;
+                }
+
+                if (current == null)
+                {
+                    return false;
+                }
+
+                compareResult = current.Data.CompareTo(data);
+            }
+
+            
+            // We have found the node to delete
+            // We have three cases
+            // 1. If node does not have the right node
+            if (current.Right == null)
+            {
+                if (parent == null)
+                {
+                    this.rootNode = current.Left;
+                }
+                else
+                {
+                    parent.Left = current.Left;
+                }
+            }
+
+        }
+
+        public int SizeExtraMemoryUsed()
+        {
+            var treeDataList = InOrderTraversal();
+
+            return treeDataList.Count;
+        }
+
+        public int Size()
         {
             throw new NotImplementedException();
         }
 
-        private bool SearchRecursive(T data, Node<T> parentNode)
+        public int MaxDepth()
         {
-            if (parentNode == null)
+            return MaxDepth(this.rootNode);
+        }
+
+        public int MaxDepth(Node<T> startNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T MinValue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public T MaxValue()
+        {
+            throw new NotImplementedException();
+        }
+
+        private Node<T> SearchRecursive(T data, Node<T> node)
+        {
+            if (node == null)
             {
-                return false;
+                return null;
             }
 
-            if (parentNode.Data.CompareTo(data) == 0)
+            if (node.Data.CompareTo(data) == 0)
             {
-                return true;
+                return node;
             }
-            else if(parentNode.Data.CompareTo(data) == 1)
+            else if (node.Data.CompareTo(data) == 1)
             {
-                return SearchRecursive(data, parentNode.Left);
+                return SearchRecursive(data, node.Left);
             }
             else
             {
-                return SearchRecursive(data, parentNode.Right);
+                return SearchRecursive(data, node.Right);
             }
         }
 
