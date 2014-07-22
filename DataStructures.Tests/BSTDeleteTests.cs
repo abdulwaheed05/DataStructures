@@ -21,7 +21,7 @@ namespace DataStructures.Tests
             }
 
             bst.DeleteNode(2);
-            Assert.IsFalse(bst.Search(2));
+            Assert.IsNull(bst.Search(2));
 
             var inOrderTraversal = bst.Traverse(TreeTraversalType.InOrder).ToArray();
 
@@ -47,7 +47,7 @@ namespace DataStructures.Tests
             }
 
             Assert.IsTrue(bst.DeleteNode(1));
-            Assert.IsFalse(bst.Search(1));
+            Assert.IsNull(bst.Search(1));
 
             var inOrderTraversal = bst.Traverse(TreeTraversalType.InOrder).ToArray();
 
@@ -73,7 +73,7 @@ namespace DataStructures.Tests
             }
 
             Assert.IsTrue(bst.DeleteNode(5));
-            Assert.IsFalse(bst.Search(5));
+            Assert.IsNull(bst.Search(5));
 
             var inOrderTraversal = bst.Traverse(TreeTraversalType.InOrder).ToArray();
 
@@ -99,7 +99,7 @@ namespace DataStructures.Tests
             }
 
             Assert.IsTrue(bst.DeleteNode(3));
-            Assert.IsFalse(bst.Search(3));
+            Assert.IsNull(bst.Search(3));
 
             var inOrderTraversal = bst.Traverse(TreeTraversalType.InOrder).ToArray();
 
