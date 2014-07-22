@@ -80,5 +80,28 @@ namespace DataStructures.Tests
             }
         }
 
+        [TestMethod]
+        public void LevelOrderTraversalDoubles()
+        {
+            double[] unsortedArray = { -3.3, -5.1, -4.9, -1.0, -2.2, 2.1, 3.1 };
+            double[] levelOrderArray = { -3.3, -5.1, -1.0, -4.9, -2.2, 2.1, 3.1 };
+
+            BST<double> bst = new BST<double>();
+
+            foreach (var item in unsortedArray)
+            {
+                bst.Insert(item);
+            }
+
+            var levelOrderTraversal = bst.Traverse(TreeTraversalType.LevelOrder).ToArray();
+
+            Assert.AreEqual(levelOrderArray.Length, levelOrderTraversal.Length);
+
+            for (int i = 0; i < unsortedArray.Length; i++)
+            {
+                Assert.AreEqual(levelOrderArray[i], levelOrderTraversal[i]);
+            }
+        }
+
     }
 }
