@@ -6,12 +6,13 @@ using System.Security.Permissions;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 
 namespace DataStructures.BinaryTrees
 {
     /// <summary>
     ///  A BST is a binary tree where nodes are ordered in the following way
-    ///     1. Each Node contains on key (also known as data)
+    ///     1. Each Node contains one key (also known as data)
     ///     2. The keys in the left subtree are less then the key in its parent node. L less than P
     ///     3. The keys in the right subtree are greater then the key in its paraent node. P less than R
     ///     4. Duplicate keys are not allowed 
@@ -66,9 +67,110 @@ namespace DataStructures.BinaryTrees
             }
         }
 
-        public void DeleteNode(T data)
+        public bool DeleteNode(T data)
         {
-            throw new NotImplementedException();
+            if (this.rootNode == null)
+            {
+                return false;
+            }
+
+            // Find the node first, keep reference to parent
+            Node<T> current = this.rootNode;
+            Node<T> parent = null;
+            int result = current.Data.CompareTo(data);
+
+            while (result != 0)
+            {
+                if (result < 0)
+                {
+                    parent = current;
+                    current = current.Right;
+                }
+                else
+                {
+                    parent = current;
+                    current = current.Left;
+                }
+
+                if (current == null)
+                {
+                    return false;
+                }
+
+                result = current.Data.CompareTo(data);
+            }
+
+            if (current.Right == null)
+            {
+                if (parent == null)
+                {
+                    this.rootNode = current.Left;
+                }
+                else
+                {
+                    if (parent.Left == current)
+                    {
+                        parent.Left = current.Left;
+                    }
+                    else
+                    {
+                        parent.Right = current.Left;
+                    }
+                }
+            }
+
+            else if (current.Right.Left == null)
+            {
+                if (parent == null)
+                {
+                    this.rootNode = current.Right;
+                }
+                else
+                {
+                    if (parent.Left == current)
+                    {
+                        parent.Left = current.Right;
+                    }
+                    else
+                    {
+                        parent.Right = current.Right;
+                    }
+                }            
+            }
+            else
+            {
+                // Find successor for this node
+                Node<T> successorParent = current.Right;
+                Node<T> tempNode = successorParent.Left;
+
+                while (tempNode.Left != null)
+                {
+                    successorParent = tempNode;
+                    tempNode = tempNode.Left;
+                }
+
+                successorParent.Left = successorParent.Right;
+                tempNode.Left = current.Left;
+                tempNode.Right = current.Right;
+
+                if (parent == null)
+                {
+                    this.rootNode = tempNode;
+                }
+                else
+                {
+                    if (parent.Left == current)
+                    {
+                        parent.Left = tempNode;
+                    }
+                    else
+                    {
+                        parent.Right = tempNode;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private bool SearchRecursive(T data, Node<T> parentNode)
@@ -82,7 +184,7 @@ namespace DataStructures.BinaryTrees
             {
                 return true;
             }
-            else if(parentNode.Data.CompareTo(data) == 1)
+            else if (parentNode.Data.CompareTo(data) == 1)
             {
                 return SearchRecursive(data, parentNode.Left);
             }
@@ -193,7 +295,33 @@ namespace DataStructures.BinaryTrees
 
         private List<T> LevelOrderTraversal()
         {
-            throw new NotImplementedException();
+            List<T> nodeList = new List<T>();
+
+            if (this.rootNode == null)
+            {
+                return nodeList;
+            }
+
+            Queue<Node<T>> queue = new Queue<Node<T>>();
+            queue.Enqueue(this.rootNode);
+
+            while (queue.Count > 0)
+            {
+                Node<T> node = queue.Dequeue();
+                nodeList.Add(node.Data);
+
+                if (node.Left != null)
+                {
+                    queue.Enqueue(node.Left);
+                }
+
+                if (node.Right != null)
+                {
+                    queue.Enqueue(node.Right);
+                }
+            }
+
+            return nodeList;
         }
 
         private void InsertRecursive(T data, Node<T> parentNode)
