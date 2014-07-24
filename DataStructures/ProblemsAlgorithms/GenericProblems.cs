@@ -55,5 +55,30 @@ namespace ProblemsAlgorithms
         public void Selection()
         {
         }
+
+        /// <summary>
+        /// The nuts and bolts problem is defined as follows. You are given a collection
+        /// of n bolts of different widths, and n corresponding nuts. You can test whether a
+        /// given nut and bolt fit together, from which you learn whether the nut is too large,
+        /// too small, or an exact match for the bolt. The differences in size between pairs of
+        /// nuts or bolts are too small to see by eye, so you cannot compare the sizes of two
+        /// nuts or two bolts directly. You are to match each bolt to each nut.
+        /// Give an O(n2) algorithm to solve the nuts and bolts problem. Then give a
+        /// randomized O(n log n) expected time algorithm for the same problem.
+        /// </summary>
+        public void NutsAndBolts()
+        {
+        }
+
+        /// <summary>
+        /// How to store 1 Million phone numbers effecienctly in memory.
+        /// One way to do it is to sort the numbers and the store the first number and for the rest
+        /// store the difference between them
+        /// </summary>
+        public ushort[] StorePhoneNumbersEffiecently(uint[] phoneNumbers)
+        {
+            // We store the first number in the first 3 slots of short array and then the rest we stor the difference
+            throw new NotImplementedException();
+        }
     }
 }

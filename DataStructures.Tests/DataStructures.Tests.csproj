@@ -54,12 +54,18 @@
     <Compile Include="BSTPropertyTests.cs" />
     <Compile Include="BSTTraversalTests.cs" />
     <Compile Include="BSTSearchTests.cs" />
+    <Compile Include="GenericTests.cs" />
+    <Compile Include="SortingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataStructures\DataStructures.csproj">
       <Project>{f2a8c473-aba0-4733-b9a5-49d4f9baf14c}</Project>
       <Name>DataStructures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataStructures\ProblemsAlgorithms\ProblemsAlgorithms.csproj">
+      <Project>{dbffd4f5-1f68-4993-b5b8-9fc06b769c2f}</Project>
+      <Name>ProblemsAlgorithms</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

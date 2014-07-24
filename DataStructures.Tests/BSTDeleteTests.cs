@@ -26,10 +26,10 @@ namespace DataStructures.Tests
             var inOrderTraversal = bst.Traverse(TreeTraversalType.InOrder).ToArray();
 
             Assert.AreEqual(sortedArray.Length, inOrderTraversal.Length);
-            
-            for(int i=0; i<sortedArray.Length;i++)
+
+            for (int i = 0; i < sortedArray.Length; i++)
             {
-               Assert.AreEqual(sortedArray[i], inOrderTraversal[i]);
+                Assert.AreEqual(sortedArray[i], inOrderTraversal[i]);
             }
         }
 
@@ -89,7 +89,7 @@ namespace DataStructures.Tests
         public void DeleteNodeWithLeftAndRightChild()
         {
             int[] unsortedArray = { 3, 5, 4, 1, 2, 6 };
-            int[] sortedArray = { 1, 2, 3, 4, 6};
+            int[] sortedArray = { 1, 2, 3, 4, 6 };
 
             BST<int> bst = new BST<int>();
 
@@ -114,7 +114,7 @@ namespace DataStructures.Tests
         [TestMethod]
         public void DeleteNodeWithLeftAndRightChildRightChildHasLeft()
         {
-            int[] unsortedArray = { 3, 5, 4, 1, 2, 8, 7};
+            int[] unsortedArray = { 3, 5, 4, 1, 2, 8, 7 };
             int[] sortedArray = { 1, 2, 3, 4, 7, 8 };
 
             BST<int> bst = new BST<int>();
@@ -135,6 +135,42 @@ namespace DataStructures.Tests
             {
                 Assert.AreEqual(sortedArray[i], inOrderTraversal[i]);
             }
+        }
+
+        [TestMethod]
+        public void DeleteNodeWithLeftAndRightChildRightChildHasTwoLeftChildren()
+        {
+            int[] unsortedArray = { 3, 5, 4, 1, 2, 9, 8, 7 };
+            int[] sortedArray = { 1, 2, 3, 4, 7, 8, 9};
+
+            BST<int> bst = new BST<int>();
+
+            foreach (var item in unsortedArray)
+            {
+                bst.Insert(item);
+            }
+
+            Assert.IsNotNull(bst.Search(5));
+            Assert.IsTrue(bst.DeleteNode(5));
+            Assert.IsNull(bst.Search(5));
+
+            var inOrderTraversal = bst.Traverse(TreeTraversalType.InOrder).ToArray();
+
+            Assert.AreEqual(sortedArray.Length, inOrderTraversal.Length);
+
+            for (int i = 0; i < sortedArray.Length; i++)
+            {
+                Assert.AreEqual(sortedArray[i], inOrderTraversal[i]);
+            }
+        }
+
+        [TestMethod]
+        public void DeleteRootWhenTreeIsEmpty()
+        {
+            BST<int> bst = new BST<int>();
+
+            Assert.IsNull(bst.Search(0));
+            Assert.IsFalse(bst.DeleteNode(0));
         }
 
         [TestMethod]
